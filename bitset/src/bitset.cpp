@@ -35,7 +35,7 @@ void bitset::clear() {
     true_bits_count_ = 0;
 }
 
-[[nodiscard]] bool bitset::test(size_t k) const noexcept {
+[[nodiscard]] bool bitset::test(size_t k) const {
     if (k >= size()) return false;
 
     Word mask = Word(1) << bit_pos_in_word(k);
@@ -46,7 +46,7 @@ void bitset::clear() {
     return true_bits_count_ == 0;
 }
 
-[[nodiscard]] bool bitset::operator[](size_t k) const noexcept {
+[[nodiscard]] bool bitset::operator[](size_t k) const {
     return test(k);
 }
 
@@ -83,10 +83,11 @@ void bitset::clear() {
 }
 
 [[nodiscard]] bool bitset::is_subset(const bitset& other) const {
-    if (other.size() < size()) return false;
-    
+    if (other.true_bits_count_ < true_bits_count_) return false;
+
     for (size_t i = 0; i < bits_.size(); ++i) {
-        if (bits_[i] & ~other.bits_[i]) {
+        const Word other_word = i < other.bits_.size() ? other.bits_[i] : Word(0);
+        if (bits_[i] & ~other_word) {
             return false;
         }
     }

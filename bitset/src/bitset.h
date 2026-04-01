@@ -28,8 +28,8 @@ class bitset {
         explicit bitset(size_t initial_capacity);
 
         void set(size_t k, bool b);
-        [[nodiscard]] bool test(size_t k) const noexcept;
-        [[nodiscard]] bool operator[](size_t k) const noexcept;
+        [[nodiscard]] bool test(size_t k) const;
+        [[nodiscard]] bool operator[](size_t k) const;
 
         [[nodiscard]] bitset union_with(const bitset& other) const;
         [[nodiscard]] bitset intersection(const bitset& other) const;

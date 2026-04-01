@@ -136,6 +136,12 @@ TEST(TestBasicOperations, TestIsSubset) {
     }
     ASSERT_TRUE(bs1.is_subset(bs2));
     ASSERT_FALSE(bs2.is_subset(bs1));
+
+    bs2.clear();
+    for (size_t i = 0; i < initial_capacity1 - 1; ++i) {
+        bs2.set(i, true);
+    }
+    ASSERT_TRUE(bs2.is_subset(bs1));
 }
 
 TEST(TestMemory, TestCopy) {
