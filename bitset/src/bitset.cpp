@@ -48,10 +48,6 @@ bitset& bitset::operator=(bitset&& other) noexcept {
     std::swap(size_, other.size_);
     std::swap(true_bits_count_, other.true_bits_count_);
     
-    other.bits_ = nullptr;
-    other.size_ = 0;
-    other.true_bits_count_ = 0;
-    
     return *this;
 }
 
